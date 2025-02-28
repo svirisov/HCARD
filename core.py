@@ -2,7 +2,7 @@ import os, time, traceback
 import RPi.GPIO as io
 
 
-def configure(self):
+def configure():
     try:
         # Pin definitions
         
