@@ -41,8 +41,6 @@ def configure():
     except Exception as ex:
         print('Device failed initial setup')
         print(traceback.format_exc())
-    finally:
-        io.cleanup() # Clean exit
 
 
 def main():
@@ -61,6 +59,8 @@ def main():
             io.output(pinDict['col1'], io.LOW)
             io.output(pinDict['col2'], io.LOW)
             io.output(pinDict['col3'], io.LOW)
+
+            t += 1 # Increment to hit timeout
     
 
     except Exception as ex:
