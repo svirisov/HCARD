@@ -45,7 +45,7 @@ def configure(self):
         io.cleanup() # Clean exit
 
 
-def main(self):
+def main():
     try:
         pinDict = configure()
         t = 0
