@@ -6,17 +6,17 @@ def configure():
         # Pin definitions
         
 
-        pinDict = { 'col1' : 23,
-                    'col2' : 24,
-                    'col3' : 25,
-                    'rowSelect1' : 4,
+        pinDict = { 'col1' : 8,
+                    'col2' : 10,
+                    'col3' : 12,
+                    'rowSelect1' : 3,
                     'rowSelect2' : 5,
-                    'rowSelect3' : 6,
-                    'voltageRead1' : 26,
-                    'voltageRead2' : 19,
-                    'voltageRead3' : 16,
-                    'motorSelect1' : 12,
-                    'motorSelect2' : 13
+                    'rowSelect3' : 7,
+                    'voltageRead1' : 29,
+                    'voltageRead2' : 31,
+                    'voltageRead3' : 33,
+                    'motorSelect1' : 38,
+                    'motorSelect2' : 40
                 }
 
         # General setup
