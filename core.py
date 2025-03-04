@@ -16,7 +16,8 @@ def configure():
                     'voltageRead2' : 31,
                     'voltageRead3' : 33,
                     'motorSelect1' : 38,
-                    'motorSelect2' : 40
+                    'motorSelect2' : 40,
+                    'muxEnable': 16
                 }
 
         # General setup
@@ -35,6 +36,7 @@ def configure():
         io.setup(pinDict['voltageRead1'], io.IN, pull_up_down = io.PUD_DOWN) # Default LOW (0)
         io.setup(pinDict['voltageRead2'], io.IN, pull_up_down = io.PUD_DOWN) # Default LOW (0)
         io.setup(pinDict['voltageRead3'], io.IN, pull_up_down = io.PUD_DOWN) # Default LOW (0)
+        io.setup(pinDict['muxEnable'], io.OUT, initial = io.LOW) 
 
         return pinDict
     except Exception as ex:
@@ -115,7 +117,7 @@ def main():
                         (1,1,1)]
 
         ## TEST CODE FOR PIN VALIDATION
-        for _ in range(0,8): # while(True):
+        for _ in range(0,60): # while(True):
             for entry in readSequence:
                 io.output(pinDict['col1'], entry[0])
                 io.output(pinDict['col2'], entry[1])
