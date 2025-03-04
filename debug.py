@@ -13,3 +13,4 @@ for i in range(0,5):
     time.sleep(5)
     io.output(8,0)
     print('low')
+    time.sleep(5)
