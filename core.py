@@ -90,11 +90,18 @@ def readSensorMatrix(pinDict, pressureHist):
 
     return pressureHist, warningZone
 
+def readVoltage(pinDict):
+    v1 = io.input(pinDict['voltageRead1'])
+    v2 = io.input(pinDict['voltageRead2'])
+    v3 = io.input(pinDict['voltageRead3'])
+    voltage = f'Read - {v1}{v2}{v3}'
+    return voltage
+
 def main():
     try:
         pinDict = configure()
         t = 0
-        tlim = 100 # 5min timout
+        tlim = 20 # 1min timout
         print('Completed setup')
 
         pressureHist = []
@@ -104,20 +111,26 @@ def main():
             io.output(pinDict['col1'], io.HIGH)
             io.output(pinDict['col2'], io.HIGH)
             io.output(pinDict['col3'], io.HIGH)
-
+            time.sleep(.1)
             print('set to High')
+            print(readVoltage(pinDict))
             time.sleep(5)
 
             io.output(pinDict['col1'], io.LOW)
             io.output(pinDict['col2'], io.LOW)
             io.output(pinDict['col3'], io.LOW)
+            time.sleep(.1)
             print('set to Low')
+            print(readVoltage(pinDict))
             time.sleep(5)
             t += 1 # Increment to hit timeout
 
             # pressureHist, warningZone = readSensorMatrix(pinDict, pressureHist)
             # buzzHaptics(warningZone)
             # time.sleep(1)
+
+    except KeyboardInterrupt:
+        print('Performance terminated by user')
 
     except Exception as ex:
         traceback.print_exc()
