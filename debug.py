@@ -3,7 +3,7 @@ import RPi.GPIO as io
 
 io.setmode(io.BOARD)
 
-io.setup(8, io.IN, initial=io.LOW)
+io.setup(8, io.OUT, initial=io.LOW)
 
 print('finished setup')
 
