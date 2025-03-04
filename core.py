@@ -20,7 +20,7 @@ def configure():
                 }
 
         # General setup
-        io.setmode(io.BCM)
+        io.setmode(io.BOARD)
         io.setwarnings(False)
 
         # Pin configurations
@@ -112,6 +112,7 @@ def main():
             io.output(pinDict['col2'], io.LOW)
             io.output(pinDict['col3'], io.LOW)
             print('set to Low')
+            time.sleep(5)
             t += 1 # Increment to hit timeout
 
             # pressureHist, warningZone = readSensorMatrix(pinDict, pressureHist)
