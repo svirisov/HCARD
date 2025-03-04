@@ -95,6 +95,7 @@ def main():
         pinDict = configure()
         t = 0
         tlim = 100 # 5min timout
+        print('Completed setup')
 
         pressureHist = []
 
@@ -104,12 +105,13 @@ def main():
             io.output(pinDict['col2'], io.HIGH)
             io.output(pinDict['col3'], io.HIGH)
 
+            print('set to High')
             time.sleep(5)
 
             io.output(pinDict['col1'], io.LOW)
             io.output(pinDict['col2'], io.LOW)
             io.output(pinDict['col3'], io.LOW)
-
+            print('set to Low')
             t += 1 # Increment to hit timeout
 
             # pressureHist, warningZone = readSensorMatrix(pinDict, pressureHist)
