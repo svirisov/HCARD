@@ -106,24 +106,26 @@ def main():
 
         pressureHist = []
 
-        ## TEST CODE FOR PIN VALIDATION
-        while(t<tlim): # while(True):
-            io.output(pinDict['col1'], io.HIGH)
-            io.output(pinDict['col2'], io.HIGH)
-            io.output(pinDict['col3'], io.HIGH)
-            time.sleep(.1)
-            print('set to High')
-            print(readVoltage(pinDict))
-            time.sleep(5)
+        readSequence = [(0,0,0),
+                        (0,0,1),
+                        (0,1,0),
+                        (0,1,1),
+                        (1,0,0),
+                        (1,0,1),
+                        (1,1,1)]
 
-            io.output(pinDict['col1'], io.LOW)
-            io.output(pinDict['col2'], io.LOW)
-            io.output(pinDict['col3'], io.LOW)
-            time.sleep(.1)
-            print('set to Low')
-            print(readVoltage(pinDict))
-            time.sleep(5)
-            t += 1 # Increment to hit timeout
+        ## TEST CODE FOR PIN VALIDATION
+        for _ in range(0,8): # while(True):
+            for entry in readSequence:
+                io.output(pinDict['col1'], entry[0])
+                io.output(pinDict['col2'], entry[1])
+                io.output(pinDict['col3'], entry[2])
+                time.sleep(.1)
+                print(f'set select to  {entry[0]}{entry[1]}{entry[2]}')
+                print(readVoltage(pinDict))
+                time.sleep(10)
+
+            #t += 1 # Increment to hit timeout
 
             # pressureHist, warningZone = readSensorMatrix(pinDict, pressureHist)
             # buzzHaptics(warningZone)
