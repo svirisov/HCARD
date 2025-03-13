@@ -3,11 +3,12 @@ import RPi.GPIO as io
 
 io.setmode(io.BOARD)
 
-pinDict = { 'rowSelect1' : 3,
-            'rowSelect2' : 5,
-            'rowSelect3' : 7,
-            'voltageRead' : 40,
-            'muxEnable': 16
+pinDict = { 'rowSelect1' : 8,
+            'rowSelect2' : 10,
+            'rowSelect3' : 12,
+            'voltageRead' : 3,
+            'muxEnable': 22,
+            'col1': 16
         }
 
 # General setup
@@ -27,18 +28,14 @@ print('finished setup')
 
 readSequence = [(0,0,0),
                 (0,0,1),
-                (0,1,0),
-                (0,1,1),
-                (1,0,0),
-                (1,0,1),
-                (1,1,1)]
+                (0,1,0)]
 
 for i, vals  in enumerate(readSequence):
     io.output(pinDict['rowSelect1'],vals[0])
     io.output(pinDict['rowSelect2'],vals[1])
     io.output(pinDict['rowSelect3'],vals[2])
     print('vals set')
-    time.sleep(5)
+    time.sleep(30)
     input = io.input(pinDict['voltageRead'])
-    print('low')
+    print(f'{input}')
     time.sleep(5)
