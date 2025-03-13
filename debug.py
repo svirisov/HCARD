@@ -22,7 +22,7 @@ io.setup(pinDict['rowSelect3'], io.OUT, initial = io.LOW)
 io.setup(pinDict['voltageRead'], io.IN, pull_up_down = io.PUD_DOWN) # Default LOW (0)
 io.setup(pinDict['muxEnable'], io.OUT, initial = io.LOW) 
 
-io.setup(8, io.OUT, initial=io.LOW)
+o.setup(pinDict['col1'], io.OUT, initial = io.HIGH) 
 
 print('finished setup')
 
