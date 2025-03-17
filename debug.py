@@ -11,7 +11,7 @@ pinDict = { 'rowSelect1' : 8,
             'col1': 36,
             'col2': 38,
             'col3': 40,
-            'motorSelect1': 27,
+            'motorSelect1': 33,
             'motorSelect2': 29,
             'motorSelect3': 31
         }
@@ -57,7 +57,7 @@ try:
             io.output(pinDict['rowSelect1'],vals[0])
             io.output(pinDict['rowSelect2'],vals[1])
             io.output(pinDict['rowSelect3'],vals[2])
-            print('vals set')
+            #print('vals set')
             time.sleep(.1)
             input = io.input(pinDict['voltageRead'])
             print(f'Read: {input}')
