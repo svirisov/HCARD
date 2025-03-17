@@ -27,15 +27,29 @@ io.setup(pinDict['rowSelect3'], io.OUT, initial = io.LOW)
 io.setup(pinDict['voltageRead'], io.IN, pull_up_down = io.PUD_DOWN) # Default LOW (0)
 io.setup(pinDict['muxEnable'], io.OUT, initial = io.LOW) 
 #io.setup(pinDict['motorSelect1'], io.OUT, initial = io.LOW) 
-#io.setup(pinDict['motorSelect2'], io.OUT, initial = io.LOW) 
-#io.setup(pinDict['motorSelect3'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['motorSelect2'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['motorSelect3'], io.OUT, initial = io.LOW) 
 io.setup(pinDict['col1'], io.OUT, initial = io.LOW) 
 io.setup(pinDict['col2'], io.OUT, initial = io.HIGH) 
 io.setup(pinDict['col3'], io.OUT, initial = io.LOW) 
  
 print('finished setup')
 
-readSequence = [(0,0,1)]
+readSequence = [(0,0,0),
+                (0,0,1),
+                (0,1,0),
+                (0,1,1),
+                (1,0,0),
+                (1,0,1),
+                (1,1,1)]
+
+motorSequence = [(0,0,0),
+                 (0,0,1),
+                 (0,1,0),
+                 (0,1,1),
+                 (0,1,0),
+                 (0,0,1),
+                 (0,0,0)]
 
 try:
     while True:
@@ -44,9 +58,11 @@ try:
             io.output(pinDict['rowSelect2'],vals[1])
             io.output(pinDict['rowSelect3'],vals[2])
             print('vals set')
-            time.sleep(10)
+            time.sleep(.1)
             input = io.input(pinDict['voltageRead'])
-            print(f'{input}')
-            time.sleep(5)
+            print(f'Read: {input}')
+            time.sleep(.2)
+            io.output(pinDict['motorSelect2'],motorSequence[i,1])
+            io.output(pinDict['motorSelect3'],motorSequence[i,2])
 except KeyboardInterrupt:
     print('Process ended')
