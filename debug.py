@@ -6,9 +6,14 @@ io.setmode(io.BOARD)
 pinDict = { 'rowSelect1' : 8,
             'rowSelect2' : 10,
             'rowSelect3' : 12,
-            'voltageRead' : 3,
-            'muxEnable': 22,
-            'col1': 16
+            'voltageRead' : 21,
+            'muxEnable': 13,
+            'col1': 36,
+            'col2': 38,
+            'col3': 40,
+            'motorSelect1': 27,
+            'motorSelect2': 29,
+            'motorSelect3': 31
         }
 
 # General setup
@@ -21,21 +26,33 @@ io.setup(pinDict['rowSelect2'], io.OUT, initial = io.LOW)
 io.setup(pinDict['rowSelect3'], io.OUT, initial = io.LOW) 
 io.setup(pinDict['voltageRead'], io.IN, pull_up_down = io.PUD_DOWN) # Default LOW (0)
 io.setup(pinDict['muxEnable'], io.OUT, initial = io.LOW) 
-
-io.setup(pinDict['col1'], io.OUT, initial = io.HIGH) 
-
+io.setup(pinDict['motorSelect1'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['motorSelect2'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['motorSelect3'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['col1'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['col2'], io.OUT, initial = io.HIGH) 
+io.setup(pinDict['col3'], io.OUT, initial = io.LOW) 
+ 
 print('finished setup')
 
 readSequence = [(0,0,0),
                 (0,0,1),
-                (0,1,0)]
+                (0,1,0),
+                (0,1,1),
+                (1,0,0),
+                (1,0,1),
+                (1,1,1)]
 
-for i, vals  in enumerate(readSequence):
-    io.output(pinDict['rowSelect1'],vals[0])
-    io.output(pinDict['rowSelect2'],vals[1])
-    io.output(pinDict['rowSelect3'],vals[2])
-    print('vals set')
-    time.sleep(30)
-    input = io.input(pinDict['voltageRead'])
-    print(f'{input}')
-    time.sleep(5)
+try:
+    while True:
+        for i, vals in enumerate(readSequence):
+            io.output(pinDict['rowSelect1'],vals[0])
+            io.output(pinDict['rowSelect2'],vals[1])
+            io.output(pinDict['rowSelect3'],vals[2])
+            print('vals set')
+            time.sleep(10)
+            input = io.input(pinDict['voltageRead'])
+            print(f'{input}')
+            time.sleep(5)
+except KeyboardInterrupt:
+    print('Process ended')
