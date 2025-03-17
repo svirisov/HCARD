@@ -62,7 +62,7 @@ try:
             input = io.input(pinDict['voltageRead'])
             print(f'Read: {input}')
             time.sleep(.2)
-            io.output(pinDict['motorSelect2'],motorSequence[i,1])
-            io.output(pinDict['motorSelect3'],motorSequence[i,2])
+            io.output(pinDict['motorSelect2'],motorSequence[i][1])
+            io.output(pinDict['motorSelect3'],motorSequence[i][2])
 except KeyboardInterrupt:
     print('Process ended')
