@@ -35,13 +35,7 @@ io.setup(pinDict['col3'], io.OUT, initial = io.LOW)
  
 print('finished setup')
 
-readSequence = [(0,0,0),
-                (0,0,1),
-                (0,1,0),
-                (0,1,1),
-                (1,0,0),
-                (1,0,1),
-                (1,1,1)]
+readSequence = [(0,0,1)]
 
 try:
     while True:
