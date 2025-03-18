@@ -61,8 +61,8 @@ try:
             io.output(pinDict['rowSelect3'],vals[2])
             #print('vals set')
             time.sleep(.1)
-            inputV[i] = io.input(pinDict['voltageRead'])
-            print(f'Read: {input}')
+            inputV[i-1] = io.input(pinDict['voltageRead'])
+            print(f'Read: {inputV[i-1]}')
             time.sleep(.2)
         if (inputV[1] - hist[1]!=0):
             io.output(pinDict['motorSelect1'],1)
