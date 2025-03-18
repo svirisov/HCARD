@@ -63,6 +63,7 @@ try:
             print(f'Read: {input}')
             time.sleep(.2)
         for i, vals in enumerate(motorSequence):
+            io.output(pinDict['motorSelect1'],vals[0])
             io.output(pinDict['motorSelect2'],vals[1])
             io.output(pinDict['motorSelect3'],vals[2])
             time.sleep(5)
