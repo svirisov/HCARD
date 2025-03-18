@@ -50,7 +50,7 @@ motorSequence = [(0,0,0),
                 (0,1,0),
                 (1,0,0)]
 
-hist = np.ones(6)
+hist = np.zeros(6)
 inputV = np.zeros(6)
 
 try:
@@ -63,10 +63,12 @@ try:
             time.sleep(.1)
             inputV[i-1] = io.input(pinDict['voltageRead'])
             #print(f'Read: {inputV[i-1]}')
-            time.sleep(.2)
+            time.sleep(.1)
         print(f'READ: {inputV}')
         print(f'Hist: {hist}')
-        if (inputV[1] - hist[1]!=0):
+        time.sleep(.2)
+        print(f'Compare: {inputV[1]}:{hist[1]}')
+        if (inputV[1] != hist[1]):
             io.output(pinDict['motorSelect1'],io.HIGH)
             io.output(pinDict['motorSelect2'],0)
             io.output(pinDict['motorSelect3'],0)
