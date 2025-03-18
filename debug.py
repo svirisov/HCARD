@@ -44,12 +44,12 @@ readSequence = [(0,0,0),
                 (1,1,1)]
 
 motorSequence = [(0,0,0),
-                 (0,0,1),
-                 (0,1,0),
-                 (0,1,1),
-                 (0,1,0),
-                 (0,0,1),
-                 (0,0,0)]
+                (0,0,1),
+                (0,1,0),
+                (0,1,1),
+                (1,0,0),
+                (1,0,1),
+                (1,1,1)]
 
 try:
     while True:
@@ -66,7 +66,8 @@ try:
             io.output(pinDict['motorSelect1'],vals[0])
             io.output(pinDict['motorSelect2'],vals[1])
             io.output(pinDict['motorSelect3'],vals[2])
+            
+            print(f'Vals set {vals[0]}{vals[1]}{vals[2]}')
             time.sleep(5)
-            print(f'Vals set {vals[0]}{vals[2]}{vals[2]}')
 except KeyboardInterrupt:
     print('Process ended')
