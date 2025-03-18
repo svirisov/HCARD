@@ -75,6 +75,7 @@ try:
             print(f'Vals set {vals[0]}{vals[1]}{vals[2]}')
             time.sleep(5)
             io.output(pinDict['motorSelect1'],io.LOW)
+        time.sleep(.2)
         hist = inputV
 except KeyboardInterrupt:
     print('Process ended')
