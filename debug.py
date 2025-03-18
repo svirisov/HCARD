@@ -55,6 +55,7 @@ inputV = np.zeros(6)
 
 try:
     while True:
+        hist = inputV
         for i, vals in enumerate(readSequence):
             io.output(pinDict['rowSelect1'],vals[0])
             io.output(pinDict['rowSelect2'],vals[1])
@@ -66,7 +67,6 @@ try:
             time.sleep(.1)
         print(f'READ: {inputV}')
         print(f'Hist: {hist}')
-        time.sleep(.2)
         print(f'Compare: {inputV[1]}:{hist[1]}')
         if (inputV[1] != hist[1]):
             io.output(pinDict['motorSelect1'],io.HIGH)
@@ -76,6 +76,6 @@ try:
             time.sleep(5)
             io.output(pinDict['motorSelect1'],io.LOW)
         time.sleep(.2)
-        hist = inputV
+        
 except KeyboardInterrupt:
     print('Process ended')
