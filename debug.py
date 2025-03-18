@@ -1,4 +1,5 @@
 import time
+import numpy as np
 import RPi.GPIO as io
 
 io.setmode(io.BOARD)
@@ -13,7 +14,8 @@ pinDict = { 'rowSelect1' : 8,
             'col3': 40,
             'motorSelect1': 22,
             'motorSelect2': 24,
-            'motorSelect3': 26
+            'motorSelect3': 26,
+            'motorSelect4': 18
         }
 
 # General setup
@@ -48,23 +50,27 @@ motorSequence = [(0,0,0),
                 (0,1,0),
                 (1,0,0)]
 
+hist = np.ones(1,6)
+inputV = np.zeros(1,6)
+
 try:
     while True:
-#        for i, vals in enumerate(readSequence):
-#            io.output(pinDict['rowSelect1'],vals[0])
-#            io.output(pinDict['rowSelect2'],vals[1])
-#            io.output(pinDict['rowSelect3'],vals[2])
-#            #print('vals set')
-#            time.sleep(.1)
-#            input = io.input(pinDict['voltageRead'])
-#            print(f'Read: {input}')
-#            time.sleep(.2)
-        for i, vals in enumerate(motorSequence):
-            io.output(pinDict['motorSelect1'],vals[0])
-            io.output(pinDict['motorSelect2'],vals[1])
-            io.output(pinDict['motorSelect3'],vals[2])
-            
+        for i, vals in enumerate(readSequence):
+            io.output(pinDict['rowSelect1'],vals[0])
+            io.output(pinDict['rowSelect2'],vals[1])
+            io.output(pinDict['rowSelect3'],vals[2])
+            #print('vals set')
+            time.sleep(.1)
+            inputV[i] = io.input(pinDict['voltageRead'])
+            print(f'Read: {input}')
+            time.sleep(.2)
+        if (inputV[1] - hist[1]!=0):
+            io.output(pinDict['motorSelect1'],1)
+            io.output(pinDict['motorSelect2'],0)
+            io.output(pinDict['motorSelect3'],0)
             print(f'Vals set {vals[0]}{vals[1]}{vals[2]}')
             time.sleep(5)
+            io.output(pinDict['motorSelect1'],1)
+        hist = inputV
 except KeyboardInterrupt:
     print('Process ended')
