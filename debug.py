@@ -11,9 +11,9 @@ pinDict = { 'rowSelect1' : 8,
             'col1': 36,
             'col2': 38,
             'col3': 40,
-            'motorSelect1': 33,
-            'motorSelect2': 29,
-            'motorSelect3': 31
+            'motorSelect1': 22,
+            'motorSelect2': 24,
+            'motorSelect3': 26
         }
 
 # General setup
@@ -46,10 +46,7 @@ readSequence = [(0,0,0),
 motorSequence = [(0,0,0),
                 (0,0,1),
                 (0,1,0),
-                (0,1,1),
-                (1,0,0),
-                (1,0,1),
-                (1,1,1)]
+                (1,0,0)]
 
 try:
     while True:
