@@ -62,15 +62,17 @@ try:
             #print('vals set')
             time.sleep(.1)
             inputV[i-1] = io.input(pinDict['voltageRead'])
-            print(f'Read: {inputV[i-1]}')
+            #print(f'Read: {inputV[i-1]}')
             time.sleep(.2)
+        print(f'READ: {inputV}')
+        print(f'Hist: {hist}')
         if (inputV[1] - hist[1]!=0):
-            io.output(pinDict['motorSelect1'],1)
+            io.output(pinDict['motorSelect1'],io.HIGH)
             io.output(pinDict['motorSelect2'],0)
             io.output(pinDict['motorSelect3'],0)
             print(f'Vals set {vals[0]}{vals[1]}{vals[2]}')
             time.sleep(5)
-            io.output(pinDict['motorSelect1'],1)
+            io.output(pinDict['motorSelect1'],io.LOW)
         hist = inputV
 except KeyboardInterrupt:
     print('Process ended')
