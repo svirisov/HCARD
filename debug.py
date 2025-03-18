@@ -68,12 +68,12 @@ try:
         print(f'READ: {inputV}')
         print(f'Hist: {hist}')
         print(f'Compare: {inputV[1]}:{hist[1]}')
-        if (inputV[1] != hist[1]):
+        if (inputV[1] != 0):
             io.output(pinDict['motorSelect1'],io.HIGH)
             io.output(pinDict['motorSelect2'],0)
             io.output(pinDict['motorSelect3'],0)
             print(f'Vals set {vals[0]}{vals[1]}{vals[2]}')
-            time.sleep(5)
+            time.sleep(1)
             io.output(pinDict['motorSelect1'],io.LOW)
         time.sleep(.2)
         
