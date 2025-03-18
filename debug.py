@@ -50,8 +50,8 @@ motorSequence = [(0,0,0),
                 (0,1,0),
                 (1,0,0)]
 
-hist = np.ones(1,6)
-inputV = np.zeros(1,6)
+hist = np.ones(6)
+inputV = np.zeros(6)
 
 try:
     while True:
