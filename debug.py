@@ -12,7 +12,7 @@ pinDict = { 'rowSelect1' : 8,
             'col1': 36,
             'col2': 38,
             'col3': 40,
-            'motorSelect1': 22,
+            'motorSelect1': 18,
             'motorSelect2': 24,
             'motorSelect3': 26,
             'motorSelect4': 18
