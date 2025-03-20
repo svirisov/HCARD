@@ -57,16 +57,16 @@ try:
     while True:
         for j, column in enumerate(['col1', 'col2', 'col3']):
             io.output(pinDict[column], io.HIGH)
-            time.sleep(.05)
+            time.sleep(.25)
             for i, vals in enumerate(readSequence):
                 io.output(pinDict['rowSelect1'],vals[0])
                 io.output(pinDict['rowSelect2'],vals[1])
                 io.output(pinDict['rowSelect3'],vals[2])
                 #print('vals set')
-                time.sleep(.1)
+                time.sleep(.15)
                 inputV[i-1] = io.input(pinDict['voltageRead'])
                 #print(f'Read: {inputV[i-1]}')
-                time.sleep(.1)
+                time.sleep(.15)
             print(f'READ: {inputV}')
             io.output(pinDict[column], io.LOW)
         for j, motor in enumerate(['motorSelect1','motorSelect4','motorSelect3','motorSelect4']):
