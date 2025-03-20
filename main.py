@@ -67,6 +67,15 @@ def sense(pinDict):
         return 1
     else:
         return -1
+    
+def buzz(zone, pinDict):
+    io.output(pinDict['motorSelect1'],io.HIGH)
+    io.output(pinDict['motorSelect3'],io.HIGH)
+    #motorStatus[j] = 1
+    print(f'Vals set {zone}')
+    time.sleep(.5)
+    io.output(pinDict['motorSelect1'],io.LOW)
+    io.output(pinDict['motorSelect3'],io.LOW)
 
 def main():
     # create server object
@@ -90,6 +99,8 @@ def main():
             message = f"{result}"
             print(f"Sample {count} Pressure: {message}")
             flask.send_message("update_zone", {"data": message})
+            if result != -1:
+                buzz(result, pinDict)
             count += 1
     except KeyboardInterrupt:
         print("Shutting down...") # expand to ensure clean shutdown
