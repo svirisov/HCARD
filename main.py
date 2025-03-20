@@ -64,9 +64,9 @@ def sense(pinDict):
     print(f'READ: {inputV}')
 
     if inputV[1] == 0:
-        return 1
-    else:
         return 0
+    else:
+        return -1
 
 def main():
     # create server object
@@ -89,8 +89,7 @@ def main():
             result = sense(pinDict)
             message = f"{result}"
             print(f"Sample {count} Pressure: {message}")
-            if result != 0:
-                flask.send_message("update_zone", {"data": message})
+            flask.send_message("update_zone", {"data": message})
             count += 1
     except KeyboardInterrupt:
         print("Shutting down...") # expand to ensure clean shutdown

@@ -10,7 +10,9 @@ jQuery(function(){
         });
         /* select and enable region of interest */
         zone = parseInt(msg.data);
-        $(regions[zone]).css("opacity","80%"); 
+        if (zone != -1){
+            $(regions[zone]).css("opacity","80%"); 
+        };       
     });
 
     socket.on('after_connect', function() {
