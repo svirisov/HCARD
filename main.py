@@ -63,7 +63,7 @@ def sense(pinDict):
         time.sleep(.15)
     print(f'READ: {inputV}')
 
-    if sum(inputV[3:5]) != 3:
+    if sum(inputV[3:6]) != 3:
         return 2
     elif inputV[1] == 0:
         return 1
