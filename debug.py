@@ -55,7 +55,7 @@ motorStatus = np.zeros(4)
 try:
     while True:
         for j, column in enumerate(['col1', 'col2', 'col3']):
-            io.output[pinDict[column], io.HIGH]
+            io.output(pinDict[column], io.HIGH)
             time.sleep(.05)
             for i, vals in enumerate(readSequence):
                 io.output(pinDict['rowSelect1'],vals[0])
@@ -67,7 +67,7 @@ try:
                 #print(f'Read: {inputV[i-1]}')
                 time.sleep(.1)
             print(f'READ: {inputV}')
-            io.output[pinDict[column], io.LOW]
+            io.output(pinDict[column], io.LOW)
         for j, motor in enumerate('motorSelect1','motorSelect4','motorSelect3','motorSelect4'):
             if (inputV[1] != 0):
                 io.output(pinDict[motor],io.HIGH)
