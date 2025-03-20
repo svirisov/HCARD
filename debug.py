@@ -33,7 +33,7 @@ io.setup(pinDict['motorSelect2'], io.OUT, initial = io.LOW)
 io.setup(pinDict['motorSelect3'], io.OUT, initial = io.LOW)
 io.setup(pinDict['motorSelect4'], io.OUT, initial = io.LOW)
 io.setup(pinDict['col1'], io.OUT, initial = io.LOW) 
-io.setup(pinDict['col2'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['col2'], io.OUT, initial = io.HIGH) 
 io.setup(pinDict['col3'], io.OUT, initial = io.LOW) 
  
 print('finished setup')
@@ -55,20 +55,17 @@ motorStatus = np.zeros(4)
 
 try:
     while True:
-        for j, column in enumerate(['col1']):
-            io.output(pinDict[column], io.HIGH)
-            time.sleep(.25)
-            for i, vals in enumerate(readSequence):
-                io.output(pinDict['rowSelect1'],vals[0])
-                io.output(pinDict['rowSelect2'],vals[1])
-                io.output(pinDict['rowSelect3'],vals[2])
-                #print('vals set')
-                time.sleep(.15)
-                inputV[i-1] = io.input(pinDict['voltageRead'])
-                #print(f'Read: {inputV[i-1]}')
-                time.sleep(.15)
-            print(f'READ: {inputV}')
-            io.output(pinDict[column], io.LOW)
+        time.sleep(.25)
+        for i, vals in enumerate(readSequence):
+            io.output(pinDict['rowSelect1'],vals[0])
+            io.output(pinDict['rowSelect2'],vals[1])
+            io.output(pinDict['rowSelect3'],vals[2])
+            #print('vals set')
+            time.sleep(.15)
+            inputV[i-1] = io.input(pinDict['voltageRead'])
+            #print(f'Read: {inputV[i-1]}')
+            time.sleep(.15)
+        print(f'READ: {inputV}')
         for j, motor in enumerate(['motorSelect1','motorSelect4','motorSelect3','motorSelect4']):
             if (inputV[1] != 0):
                 io.output(pinDict[motor],io.HIGH)
