@@ -63,19 +63,44 @@ def sense(pinDict):
         time.sleep(.15)
     print(f'READ: {inputV}')
 
-    if inputV[1] == 0:
+    if sum(inputV[3:5]) != 3:
+        return 2
+    elif inputV[1] == 0:
         return 1
     else:
         return -1
     
 def buzz(zone, pinDict):
-    io.output(pinDict['motorSelect1'],io.HIGH)
-    io.output(pinDict['motorSelect3'],io.HIGH)
-    #motorStatus[j] = 1
-    print(f'Vals set {zone}')
-    time.sleep(.5)
-    io.output(pinDict['motorSelect1'],io.LOW)
-    io.output(pinDict['motorSelect3'],io.LOW)
+    if zone == 1:
+        print(f'Vals set {zone}')
+        motor1 = 'motorSelect1'
+        motor2 = 'motorSelect3'
+
+        io.output(pinDict[motor1],io.HIGH)
+        io.output(pinDict[motor2],io.HIGH)
+        
+        time.sleep(.5)
+        io.output(pinDict[motor1],io.LOW)
+        io.output(pinDict[motor2],io.LOW)
+    elif zone == 2:
+        print(f'Vals set {zone}')
+        motor1 = 'motorSelect2'
+        motor2 = 'motorSelect4'
+
+        io.output(pinDict[motor1],io.HIGH)
+        io.output(pinDict[motor2],io.HIGH)
+        time.sleep(.25)
+        io.output(pinDict[motor1],io.LOW)
+        io.output(pinDict[motor2],io.LOW)
+        time.sleep(.1)
+        io.output(pinDict[motor1],io.HIGH)
+        io.output(pinDict[motor2],io.HIGH)
+        time.sleep(.25)
+        io.output(pinDict[motor1],io.LOW)
+        io.output(pinDict[motor2],io.LOW)
+    else:
+        return
+    
 
 def main():
     # create server object
