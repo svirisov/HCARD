@@ -1,5 +1,5 @@
 jQuery(function(){
-    var socket = io.connect('http://192.168.22.253:5000');
+    var socket = io.connect('http://192.168.22.253:8080');
 
     var regions = ['#region1', '#region2', '#region3'];
     

@@ -35,7 +35,7 @@ class FlaskServer:
             self.thread.join(timeout=5)
 
     def _run_server(self): # internal to run server as thread
-        self.socketio.run(self.app, host=self.host,  port=5004, debug=False)
+        self.socketio.run(self.app, host=self.host,  port=8080, debug=False)
 
     def send_message(self, event, data):
         self.socketio.emit(event, data)
