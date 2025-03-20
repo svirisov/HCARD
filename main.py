@@ -64,7 +64,7 @@ def sense(pinDict):
     print(f'READ: {inputV}')
 
     if inputV[1] == 0:
-        return 0
+        return 1
     else:
         return -1
 
