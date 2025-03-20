@@ -78,3 +78,7 @@ try:
         
 except KeyboardInterrupt:
     print('Process ended')
+    for pin in pinDict:
+        if pin=='voltageRead':
+            continue
+        io.output(pinDict[pin], io.LOW)
