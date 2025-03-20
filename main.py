@@ -65,7 +65,7 @@ def sense(pinDict):
 
     if sum(inputV[3:6]) != 3:
         return 2
-    elif inputV[1] == 0:
+    elif sum(inputV[0:2]) == 0:
         return 1
     else:
         return -1
