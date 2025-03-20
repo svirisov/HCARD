@@ -67,7 +67,7 @@ try:
             time.sleep(.15)
         print(f'READ: {inputV}')
         for j, motor in enumerate(['motorSelect1','motorSelect4','motorSelect3','motorSelect4']):
-            if (inputV[1] != 0):
+            if (inputV[1] == 0):
                 io.output(pinDict[motor],io.HIGH)
                 motorStatus[j] = 1
                 print(f'Vals set {motorStatus}')
