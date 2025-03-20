@@ -63,7 +63,7 @@ def sense(pinDict):
         time.sleep(.15)
     print(f'READ: {inputV}')
 
-    if input[1] == 0:
+    if inputV[1] == 0:
         return 1
     else:
         return 0
