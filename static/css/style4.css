@@ -1,0 +1,222 @@
+/* ================== */
+/* HEADER + THEME CSS */
+/* ================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: #002147;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 2px solid #9D9D9D;
+}
+
+.logo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.5rem;
+    color: #D4EFFC;
+    font-weight: 600;
+    cursor: default;
+    margin-right: auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #D4EFFC;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 85vh;
+    margin: 80px 0px;
+    transition: background 0.2s linear;
+}
+
+body.dark {
+    background-color: #011935;
+}
+
+body.dark h1,
+body.dark .support a {
+    color: #D4EFFC;
+}
+
+/* Theme toggle */
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox-label {
+    background-color: #111;
+    width: 60px;
+    height: 30px;
+    border-radius: 65px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-toggle {
+    height: 20px;
+    float: left;
+    padding: 0;
+    margin: 5px;
+}
+
+.checkbox-label .ball {
+    background-color: #D4EFFC;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+    transform: translateX(30px);
+}
+
+@media screen and (min-width: 900px) {
+    .header {
+        height: 80px;
+    }
+    .logo {
+        font-size: 2.5rem;
+    }
+    .checkbox-label {
+        scale: 100%;
+    }
+    .body {
+        top: 20vh;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header {
+        height: 150px;
+    }
+    .logo {
+        font-size: 3.5rem;
+    }
+    .checkbox-label {
+        scale: 150%;
+    }
+    .body {
+        top: 150px;
+    }
+}
+
+/* =============== */
+/* FOOT IMAGE AREA */
+/* =============== */
+.foot-img {
+    position: relative;
+    float: left;
+    height: 90dvh;
+    width: auto;
+    padding: 40px;
+    margin: 30px;
+}
+
+.foot-img img.foot {
+    object-fit: contain;
+    width: auto;
+    height: 100%;
+}
+
+/* ========================= */
+/* FULL-COVER OVERLAY IMAGES */
+/* ========================= */
+.overlay {
+    position: absolute;
+    top: 4.7%;
+    left: 5.5%;
+    width: 90%;
+    height: 90%;
+    z-index: 200;
+    /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* When the 'show' class is added, the overlay becomes visible */
+.overlay.show {
+    opacity: 1;
+}
+
+/* Sequential transition delays for toggling overlays */
+#region1.show {
+    transition-delay: 0s;
+}
+
+#region2.show {
+    transition-delay: 0.3s;
+}
+
+#region3.show {
+    transition-delay: 0.6s;
+}
+
+/* region1 = toes */
+#region1 {
+    background: url("../img/toes.png") no-repeat center center;
+    background-size: contain;
+}
+
+/* region2 = midfoot */
+#region2 {
+    background: url("../img/mid.png") no-repeat center center;
+    background-size: contain;
+}
+
+/* region3 = heel */
+#region3 {
+    background: url("../img/helloff.png") no-repeat center center;
+    background-size: contain;
+}
+
+/* ========================= */
+/* "HIGH PRESSURE" TEXT BOX */
+/* ========================= */
+.region-text {
+    position: absolute;  /* Positioned over the foot image */
+    display: none;       /* Hidden by default */
+    padding: 10px 15px;
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 300;
+}
+
+/* When the 'show' class is added, display the text box */
+.region-text.show {
+    display: block;
+}
+
+/* Position each text box as needed */
+#text1 {
+    top: 15%;
+    left: 55%;
+}
+#text2 {
+    top: 40%;
+    left: 55%;
+}
+#text3 {
+    top: 75%;
+    left: 55%;
+}

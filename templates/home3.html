@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Foot Alert</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style4.css') }}">
+    <!-- JavaScript libraries -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+    <!-- Inline JavaScript to handle region rotation -->
+    <script>
+      // Show a region overlay and its associated text box
+      function showRegion(regionId) {
+          console.log("Showing " + regionId);
+          var overlay = document.getElementById(regionId);
+          overlay.classList.add("show");
+          var suffix = regionId.replace("region", "");
+          var textBox = document.getElementById("text" + suffix);
+          textBox.classList.add("show");
+      }
+
+      // Hide a region overlay and its text box
+      function hideRegion(regionId) {
+          console.log("Hiding " + regionId);
+          var overlay = document.getElementById(regionId);
+          overlay.classList.remove("show");
+          var suffix = regionId.replace("region", "");
+          var textBox = document.getElementById("text" + suffix);
+          textBox.classList.remove("show");
+      }
+
+      // Hide all regions
+      function hideAllRegions() {
+          hideRegion("region1");
+          hideRegion("region2");
+          hideRegion("region3");
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+          // For testing, show region1 by default
+          showRegion("region1");
+
+          // Connect to Socket.IO (using the current domain and port)
+          var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
+          // Listen for "update_zone" events from the server
+          socket.on("update_zone", function(data) {
+              console.log("update_zone received", data);
+              hideAllRegions(); // Hide all regions first
+
+              // The server sends data.data as a string "0", "1", or "2"
+              if(data.data === "0") {
+                  showRegion("region1");
+              } else if(data.data === "1") {
+                  showRegion("region2");
+              } else if(data.data === "2") {
+                  showRegion("region3");
+              }
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#" class="logo">Foot Alert</a>
+      <div>
+        <input type="checkbox" class="checkbox" id="theme">
+        <label for="theme" class="checkbox-label">
+          <img class="theme-toggle" src="{{ url_for('static', filename='img/moon.png') }}">
+          <img class="theme-toggle" src="{{ url_for('static', filename='img/sun.png') }}">
+          <span class="ball"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Main content container -->
+    <div class="container">
+      <div class="foot-img" style="position: relative;">
+        <!-- Base foot image -->
+        <img class="foot" src="{{ url_for('static', filename='img/foot2_off.png') }}" alt="Foot Image">
+        <!-- Overlays (hidden by default until the "show" class is added) -->
+        <div class="overlay" id="region1"></div>
+        <div class="overlay" id="region2"></div>
+        <div class="overlay" id="region3"></div>
+        <!-- Text boxes for each region (hidden by default) -->
+        <div class="region-text" id="text1">High pressure zone identified</div>
+        <div class="region-text" id="text2">High pressure zone identified</div>
+        <div class="region-text" id="text3">High pressure zone identified</div>
+      </div>
+    </div>
+  </body>
+</html>
