@@ -51,24 +51,36 @@ def configure():
         print('encountered error during board startup')
 
 def sense(pinDict):
-    inputV = np.zeros(6)
-    for i, vals in enumerate(readSequence):
-        io.output(pinDict['rowSelect1'],vals[0])
-        io.output(pinDict['rowSelect2'],vals[1])
-        io.output(pinDict['rowSelect3'],vals[2])
-        #print('vals set')
-        time.sleep(.15)
-        inputV[i-1] = io.input(pinDict['voltageRead'])
-        #print(f'Read: {inputV[i-1]}')
-        time.sleep(.15)
-    print(f'READ: {inputV}')
+    error = -1
 
-    if sum(inputV[3:6]) != 3:
-        return 2
-    elif sum(inputV[0:2]) == 0:
-        return 1
-    else:
-        return -1
+    for col in ['col1', 'col2', 'col3']:
+        io.output(pinDict[col], io.HIGH)
+        time.sleep(.25)
+        inputV = np.zeros(6)
+        for i, vals in enumerate(readSequence):
+            io.output(pinDict['rowSelect1'],vals[0])
+            io.output(pinDict['rowSelect2'],vals[1])
+            io.output(pinDict['rowSelect3'],vals[2])
+            #print('vals set')
+            time.sleep(.15)
+            inputV[i-1] = io.input(pinDict['voltageRead'])
+            #print(f'Read: {inputV[i-1]}')
+            time.sleep(.15)
+        print(f'READ: {inputV}')
+
+        io.output(pinDict[col], io.LOW)
+        time.sleep(.25)
+
+        if sum(inputV[3:6]) != 3:
+            error = 2
+            return error
+        elif sum(inputV[0:2]) == 0:
+            error = 1
+            return error
+        else:
+            continue
+
+    return error
     
 def buzz(zone, pinDict):
     if zone == 1:
