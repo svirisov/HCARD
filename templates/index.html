@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Foot Pressure Distribution</title>
+
+    <!-- Import Inter Font & Socket.IO -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+
+<h1>Foot Pressure Distribution</h1>
+
+<!-- Global warning message -->
+<p id="warningMessage" class="warning-message">Careful! Static Position has been held for too long.</p>
+
+<!-- Foot Image & Overlays -->
+<div class="foot-container">
+    <img class="foot-img" src="{{ url_for('static', filename='foot2.png') }}" alt="Foot Image">
+
+    <!-- Highlightable Overlays -->
+    <div class="overlay heel-box" id="heel"></div>
+    <div class="overlay toe1-overlay" id="toe1"></div>
+    <div class="overlay toe2-overlay" id="toe2"></div>
+    <div class="overlay toe3-overlay" id="toe3"></div>
+    <div class="overlay toe4-overlay" id="toe4"></div>
+    <div class="overlay toe5-overlay" id="toe5"></div>
+    <div class="overlay region1-box" id="region1"></div>
+    <div class="overlay region2-box" id="region2"></div>
+
+    <!-- High Pressure Labels -->
+    <div class="high-pressure-text heel-text" id="heel-text">High Pressure Zone Identified</div>
+    <div class="high-pressure-text toe-text" id="toe-text">High Pressure Zone Identified</div>
+    <div class="high-pressure-text region1-text" id="region1-text">High Pressure Zone Identified</div>
+    <div class="high-pressure-text region2-text" id="region2-text">High Pressure Zone Identified</div>
+</div>
+
+<!-- JavaScript with Socket.IO -->
+<script src="{{url_for('static', filename='js/socketio.js')}}"></script>
+
+</body>
+</html>

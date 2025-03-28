@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Foot Alert</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style2.css') }}">
+        <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+        <script src="{{url_for('static', filename='js/socket.io.js')}}"></script>
+        <script src="{{url_for('static', filename='js/functions.js')}}"></script>
+    </head>
+
+    <body>
+        
+        <header class="header">
+            <a href="#" class="logo">Foot Alert</a>
+            <div>
+                <input type="checkbox" class="checkbox" id="theme">
+                <label for="checkbox" class="checkbox-label">
+                  <img class="theme-toggle" src="{{url_for('static', filename='img/moon.png')}}">
+                  <img class="theme-toggle" src="{{url_for('static', filename='img/sun.png')}}">
+                  <span class="ball"></span>
+                </label>
+            </div>
+        </header>
+
+        <div class="body">
+            <div class="foot-img">
+                <img class="foot" src="{{url_for('static', filename='img/foot2-clear.png')}}">
+                <div class="overlay" id="region1">
+                    <div id="toe1"></div>
+                    <div id="toe2"></div>
+                    <div id="toe3"></div>
+                    <div id="toe4"></div>
+                    <div id="toe5"></div>
+                </div>
+                <div class="overlay" id="region2"></div>
+                <div class="overlay" id="region3"></div>
+            </div>
+        </div>
+        
+    </body>
+</html>

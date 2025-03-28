@@ -13,9 +13,9 @@ pinDict = { 'rowSelect1' : 8,
             'col2': 38,
             'col3': 40,
             'motorSelect1': 18,
-            'motorSelect2': 24,
-            'motorSelect3': 26,
-            'motorSelect4': 18
+            'motorSelect2': 22,
+            'motorSelect3': 24,
+            'motorSelect4': 26
         }
 
 # General setup
@@ -30,7 +30,8 @@ io.setup(pinDict['voltageRead'], io.IN, pull_up_down = io.PUD_DOWN) # Default LO
 io.setup(pinDict['muxEnable'], io.OUT, initial = io.LOW) 
 io.setup(pinDict['motorSelect1'], io.OUT, initial = io.LOW) 
 io.setup(pinDict['motorSelect2'], io.OUT, initial = io.LOW) 
-io.setup(pinDict['motorSelect3'], io.OUT, initial = io.LOW) 
+io.setup(pinDict['motorSelect3'], io.OUT, initial = io.LOW)
+io.setup(pinDict['motorSelect4'], io.OUT, initial = io.LOW)
 io.setup(pinDict['col1'], io.OUT, initial = io.LOW) 
 io.setup(pinDict['col2'], io.OUT, initial = io.HIGH) 
 io.setup(pinDict['col3'], io.OUT, initial = io.LOW) 
@@ -42,40 +43,42 @@ readSequence = [(0,0,0),
                 (0,1,0),
                 (0,1,1),
                 (1,0,0),
-                (1,0,1),
-                (1,1,1)]
+                (1,0,1)]
 
 motorSequence = [(0,0,0),
                 (0,0,1),
                 (0,1,0),
                 (1,0,0)]
 
-hist = np.zeros(6)
 inputV = np.zeros(6)
+motorStatus = np.zeros(4)
 
 try:
     while True:
-        hist = inputV
+        time.sleep(.25)
         for i, vals in enumerate(readSequence):
             io.output(pinDict['rowSelect1'],vals[0])
             io.output(pinDict['rowSelect2'],vals[1])
             io.output(pinDict['rowSelect3'],vals[2])
             #print('vals set')
-            time.sleep(.1)
+            time.sleep(.15)
             inputV[i-1] = io.input(pinDict['voltageRead'])
             #print(f'Read: {inputV[i-1]}')
-            time.sleep(.1)
+            time.sleep(.15)
         print(f'READ: {inputV}')
-        print(f'Hist: {hist}')
-        print(f'Compare: {inputV[1]}:{hist[1]}')
-        if (inputV[1] != 0):
-            io.output(pinDict['motorSelect1'],io.HIGH)
-            io.output(pinDict['motorSelect2'],0)
-            io.output(pinDict['motorSelect3'],0)
-            print(f'Vals set {vals[0]}{vals[1]}{vals[2]}')
-            time.sleep(1)
-            io.output(pinDict['motorSelect1'],io.LOW)
+        for j, motor in enumerate(['motorSelect1','motorSelect4','motorSelect3','motorSelect4']):
+            if (inputV[1] == 0):
+                io.output(pinDict[motor],io.HIGH)
+                motorStatus[j] = 1
+                print(f'Vals set {motorStatus}')
+                time.sleep(1)
+                io.output(pinDict[motor],io.LOW)
+                motorStatus[j] = 0
         time.sleep(.2)
         
 except KeyboardInterrupt:
     print('Process ended')
+    for pin in pinDict:
+        if pin=='voltageRead':
+            continue
+        io.output(pinDict[pin], io.LOW)
